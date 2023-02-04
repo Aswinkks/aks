@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-flask-deployment
+  labels:
+    app: app1-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1-flask
+  template:
+    metadata:
+      labels:
+        app: app1-flask
+    spec:
+      containers:
+        - name: app1-flask
+          image: aswinkks/k8app
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-flask-loadbalancer-service
+  labels:
+    app: app1-flask
+spec:
+  type: LoadBalancer
+  selector:
+    app: app1-flask
+  ports:
+    - port: 5000
+      targetPort: 5000
