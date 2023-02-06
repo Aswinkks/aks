@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app1-flask
-          image: myrgacr1.azurecr.io/aswinkks/aks
+          image: myrgacr1.azurecr.io/aswinkks/aks:#{Build.BuildId}#
           ports:
             - containerPort: 5000
 ---
